@@ -1,19 +1,26 @@
+import random
+
 import enemy
 
 player_pos = [800, 500]
 screen_size = []
 next_ai = False
+hostiles = []
+enemy_level = 1
+sprites = [[],[]]
 
 def game_init(s_size, p_pos):
-    global screen_size, player_pos
+    global screen_size, player_pos, sprites, enemy_level
 
     screen_size = s_size
     player_pos = p_pos
+    enemy_level = 1
+    sprites = [[],[]]
 
 
 
-def enemies(hostiles):
-    global player_pos, next_ai
+def enemies():
+    global player_pos, next_ai, hostiles
 
     if next_ai :
         for hostile in hostiles:
@@ -22,23 +29,32 @@ def enemies(hostiles):
 
     return
 
-def logic():
+def update():
 
 
     return
 
-def spawn(pos, hostiles, creature="zombie"):
+def draw(root):
+
+    return root
+
+def spawn(pos, creature="zombie"):
+    global enemy_level, sprites, enemy_level, hostiles
+
     foe = None
+    level = enemy_level + random.randint(0, 10) - 5
+
+    if level <= 0:
+        level = enemy_level
+
     match creature:
         case "zombie":
-            foe = enemy.Zombie(pos, level, ani_sprite, attacks_sprites)
+            foe = enemy.Zombie(pos, level, sprites)
+
         case default:
             return
 
-
     hostiles.append(foe)
-
-
 
     return
 
