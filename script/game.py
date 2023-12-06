@@ -1,6 +1,9 @@
 import random
+import pygame as pg
+from script import enemy
+from script.enums import Colors
 
-import enemy
+
 
 player_pos = [800, 500]
 screen_size = []
@@ -9,8 +12,14 @@ hostiles = []
 enemy_level = 1
 sprites = [[],[]]
 
+game_map = None
+game_map_pos = [0, 0]
+
 def game_init(s_size, p_pos):
-    global screen_size, player_pos, sprites, enemy_level
+    global screen_size, player_pos, sprites, enemy_level, game_map, colors
+
+    game_map = pg.Surface((3840, 2160))
+    game_map.fill(Colors.black.value)
 
     screen_size = s_size
     player_pos = p_pos
@@ -35,6 +44,12 @@ def update():
     return
 
 def draw(root):
+
+    game_map.fill(Colors.light_grey.value)
+
+    root.blit(game_map, game_map_pos)
+
+    pg.display.update()
 
     return root
 

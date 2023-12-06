@@ -1,5 +1,6 @@
 import pygame as pg
 from script import game
+import threading
 
 
 
@@ -30,6 +31,12 @@ def main():
                 pass
 
 
+def key_handler():
+
+
+    return
+
+
 def enemies():
     global running, hostiles
 
@@ -46,6 +53,14 @@ def disp():
 
     return
 
+def update():
+    global running
+
+    while running:
+
+        game.update()
+
+
 
 def init():
     global root
@@ -53,6 +68,10 @@ def init():
     root = pg.display.set_mode()
     game.game_init(screen_size, player_pos)
 
+    update_thread = threading.Thread(target=update, args=())
+    display_thread = threading.Thread(target=disp, args=())
+    update_thread.start()
+    display_thread.start()
 
 if __name__ == '__main__':
     main()
